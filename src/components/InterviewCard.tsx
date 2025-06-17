@@ -1,13 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import Image from "next/image";
 
-import { useMemo } from "react";
-import { getRandomInterviewCover } from "@/lib/utils";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import DisplayTechIcons from "./DisplayTechIcons";
+import { getRandomInterviewCover } from "../../lib/utils";
 
 const InterviewCard = ({
   interviewId,
@@ -24,8 +23,12 @@ const InterviewCard = ({
     feedback?.createdAt || createdAt || Date.now()
   ).format("MMM D, YYYY");
 
-  const randomCover = useMemo(() => getRandomInterviewCover(), []);
- 
+  const [randomCover, setRandomCover] = useState("/covers/default.png");
+
+  useEffect(() => {
+    const cover = getRandomInterviewCover();
+    setRandomCover(cover);
+  }, []);
     
   return (
     <div className="card-border w-[360px] max-sm:w-full min-h-96">

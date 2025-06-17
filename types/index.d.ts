@@ -81,6 +81,12 @@ interface SignUpParams {
   name: string;
   email: string;
   password: string;
+  idToken: string;
+}
+
+interface ProviderProps {
+  idToken: string;
+  userData: { uid: string; name: string; email: string };
 }
 
 type FormType = "sign-in" | "sign-up";
